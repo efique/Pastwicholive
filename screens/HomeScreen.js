@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useContext } from 'react';
 import { StyleSheet, Text, View, Button as RNButton } from 'react-native';
 
-import { IconButton } from '../components';
+import { IconButton } from '../components/components.js';
 import Firebase from '../utils/firebase';
 import "firebase/compat/auth";
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';

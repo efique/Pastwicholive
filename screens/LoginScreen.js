@@ -3,7 +3,7 @@ import React from 'react';
 import { useState } from 'react';
 import { StyleSheet, Text, View, Button as RNButton } from 'react-native';
 
-import { Button, InputField, ErrorMessage } from '../components';
+import { Button, InputField, ErrorMessage } from '../components/components.js';
 import Firebase from '../utils/firebase';
 import "firebase/compat/auth";
 

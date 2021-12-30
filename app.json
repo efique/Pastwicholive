@@ -17,16 +17,34 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.valentinbarriol.Pastwicholive"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.valentinbarriol.Pastwicholive",
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "firebase": {
+        "apiKey": "AIzaSyDmx0wrVaVTv1vXiu21BH-fNdgXdrDRqhM",
+        "authDomain": "pastwitcholive.firebaseapp.com",
+        "projectId": "pastwitcholive",
+        "storageBucket": "pastwitcholive.appspot.com",
+        "messagingSenderId": "119373295756",
+        "appId": "1:119373295756:web:ae353ec5bed25416590ba9",
+        "measurementId": "G-CH7X8JD2HB",
+        "databaseURL": "https://pastwitcholive-default-rtdb.europe-west1.firebasedatabase.app/"
+      },
+      "facebook": {
+        "appId": "443283387413861"
+      }
     }
   }
 }

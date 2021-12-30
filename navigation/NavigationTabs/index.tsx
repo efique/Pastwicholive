@@ -26,21 +26,21 @@ export default function NavigationTabs() {
                 tabBarIcon: ({ color, size }) => (
                     <MaterialCommunityIcons name="home" color={color} size={size} />
                 ),
-            }}/>
+            }} />
             <Tab.Screen name="FiltersTab" component={FiltersStack} options={{
                 tabBarLabel: 'Filtres',
                 tabBarLabelPosition: 'below-icon',
                 tabBarIcon: ({ color, size }) => (
                     <MaterialCommunityIcons name="magnify" color={color} size={size} />
                 ),
-            }}/>
+            }} />
             <Tab.Screen name="ProfileTab" component={ProfileStack} options={{
                 tabBarLabel: 'Profil',
                 tabBarLabelPosition: 'below-icon',
                 tabBarIcon: ({ color, size }) => (
                     <MaterialCommunityIcons name="account" color={color} size={size} />
                 ),
-            }}/>
+            }} />
         </Tab.Navigator>
     );
 }
