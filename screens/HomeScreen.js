@@ -7,7 +7,7 @@ import Firebase from '../utils/firebase';
 import "firebase/compat/auth";
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 
-import { writeUserData, getUsersData } from '../utils/firebase';
+import { writeUserData, getUsersData, deleteUserData } from '../utils/firebase';
 
 const auth = Firebase.auth();
 
@@ -53,6 +53,12 @@ export default function HomeScreen() {
             <RNButton
                 onPress={() => { getUsersData() }}
                 title='Récuperer tous les favoris'
+                color='#f57c00'
+            />
+            <Text style={styles.text}></Text>
+            <RNButton
+                onPress={() => { deleteUserData() }}
+                title='Supprimer un favoris'
                 color='#f57c00'
             />
             {/* <Text>{users}</Text> */}

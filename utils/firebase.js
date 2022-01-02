@@ -1,7 +1,7 @@
 import firebase from 'firebase/compat';
 import Constants from 'expo-constants';
 import "firebase/compat/auth";
-import { collection, addDoc, getFirestore, query, where, getDocs } from "firebase/firestore";
+import { collection, addDoc, getFirestore, query, where, getDocs, deleteDoc, doc } from "firebase/firestore";
 
 let Firebase;
 
@@ -23,8 +23,19 @@ export async function getUsersData() {
     querySnapshot.forEach((doc) => {
         users[Object.keys(users).length + 1] = doc.data().url_clip;
     });
-    console.log(users);
-    // return querySnapshot;
+    return users;
+}
+
+export async function deleteUserData(url_clip) {
+    let user = Firebase.auth().currentUser;
+    const q = query(collection(db, "utilisateurs"), where("user_id", "==", user.uid), where("url_clip", "==", url_clip));
+    const querySnapshot = await getDocs(q);
+    let users = {};
+    querySnapshot.forEach((doc) => {
+        users[0] = doc.id;
+    });
+    await deleteDoc(doc(db, "utilisateurs", users[0]));
+    return users;
 }
 
 export default Firebase;
