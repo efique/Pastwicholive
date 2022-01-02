@@ -36,7 +36,8 @@ export default function HomeStack() {
                             size={24}
                             color='#fff'
                             onPress={handleSignOut}
-                        /></Text>
+                        />
+                    </Text>
                 )
             }}
         >
