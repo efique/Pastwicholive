@@ -3,7 +3,7 @@ import {  StyleSheet,  ScrollView,  View } from "react-native";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { WebView } from 'react-native-webview';
 import { IconButton, Colors } from "react-native-paper";
-import {writeUserData} from "../../utils/firebase"
+import {writeUserData, deleteUserData} from "../../utils/firebase"
 
 export default function ClipPage({ route }) {
     const styles = StyleSheet.create({
@@ -66,6 +66,7 @@ export default function ClipPage({ route }) {
                                     size={200}
                                     onPress={() => {
                                         setFav(false)
+                                        deleteUserData(route.params.id)
                                     }}
                                 />
                             )
