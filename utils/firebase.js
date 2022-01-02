@@ -8,9 +8,10 @@ let Firebase;
 Firebase = firebase.initializeApp(Constants.manifest.extra.firebase);
 const db = getFirestore();
 
-export async function writeUserData(id, url) {
+export async function writeUserData(url) {
+    let user = Firebase.auth().currentUser;
     await addDoc(collection(db, "utilisateurs"), {
-        user_id: id,
+        user_id: user.uid,
         url_clip: url,
     });
 }

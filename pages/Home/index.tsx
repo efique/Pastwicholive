@@ -13,9 +13,9 @@ export default function HomePage() {
     const [pagination, setPagination] = useState("")
 
     const navigation = useNavigation();
-    
+
     useEffect(() => {
-        fetch('https://api.twitch.tv/helix/games/top?after='+next+'&first=1', { // requete du top 100 des jeux twitch
+        fetch('https://api.twitch.tv/helix/games/top?after=' + next + '&first=1', { // requete du top 100 des jeux twitch
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer jyjuqv7imq62o6gldfufqoqz4hklhr',
@@ -80,7 +80,11 @@ export default function HomePage() {
                 data={clips}
                 renderItem={({ item }) => (
                     <Card
-                        onPress={() => { navigation.navigate('Clip') }}
+                        onPress={() => {
+                            navigation.navigate('Clip', {
+                                id: item.id.toString()
+                            })
+                        }}
 
                     >
                         <Card.Cover style={{ borderRadius: 0 }} source={{ uri: item.thumbnail_url }} />
@@ -93,7 +97,7 @@ export default function HomePage() {
                 }
                 onEndReached={() => {
                     nextPage(pagination)
-                    console.log( "pagination : " + pagination)
+                    console.log("pagination : " + pagination)
                     console.log("next : " + next)
                 }}
                 keyExtractor={item => item.id.toString()}
