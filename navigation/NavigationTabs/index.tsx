@@ -1,6 +1,6 @@
 import React from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { HomeStack, FiltersStack, ProfileStack } from "../../stacks";
+import { HomeStack, ProfileStack } from "../../stacks";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
@@ -25,13 +25,6 @@ export default function NavigationTabs() {
                 tabBarLabel: 'Accueil',
                 tabBarIcon: ({ color, size }) => (
                     <MaterialCommunityIcons name="home" color={color} size={size} />
-                ),
-            }} />
-            <Tab.Screen name="FiltersTab" component={FiltersStack} options={{
-                tabBarLabel: 'Filtres',
-                tabBarLabelPosition: 'below-icon',
-                tabBarIcon: ({ color, size }) => (
-                    <MaterialCommunityIcons name="magnify" color={color} size={size} />
                 ),
             }} />
             <Tab.Screen name="ProfileTab" component={ProfileStack} options={{

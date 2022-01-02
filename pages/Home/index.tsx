@@ -7,8 +7,6 @@ import { Card } from "react-native-paper";
 import { useNavigation } from '@react-navigation/native';
 import { nextTick } from "process";
 
-
-
 export default function HomePage() {
     const [clips, setClips] = useState([])
     const [next, nextPage] = useState("")
