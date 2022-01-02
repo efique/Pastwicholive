@@ -35,7 +35,12 @@ export async function getUserData(url_clip) {
     querySnapshot.forEach((doc) => {
         users[0] = doc.id;
     });
-    return users;
+
+    if (Object.keys(users).length > 0) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 export async function deleteUserData(url_clip) {

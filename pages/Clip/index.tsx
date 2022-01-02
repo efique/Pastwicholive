@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import {  StyleSheet,  ScrollView,  View } from "react-native";
+import { StyleSheet, ScrollView, View } from "react-native";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { WebView } from 'react-native-webview';
 import { IconButton, Colors } from "react-native-paper";
-import {writeUserData, deleteUserData} from "../../utils/firebase"
+import { writeUserData, deleteUserData, getUserData } from "../../utils/firebase"
 
 export default function ClipPage({ route }) {
     const styles = StyleSheet.create({
@@ -15,10 +15,10 @@ export default function ClipPage({ route }) {
             justifyContent: 'center'
         },
 
-        buttons:{
-            marginTop:50,
-            alignItems:'center',
-            justifyContent:'center'
+        buttons: {
+            marginTop: 50,
+            alignItems: 'center',
+            justifyContent: 'center'
         }
     });
 
@@ -37,9 +37,10 @@ export default function ClipPage({ route }) {
             .then((json) => {
                 console.log(json.data[0].embed_url)
                 setClipUrl(json.data[0].embed_url.toString())
+                const favoris = getUserData(route.params.id)
+                setFav(favoris)
             })
     }, [])
-
 
     return (
         <View style={styles.container}>
