@@ -26,6 +26,17 @@ export async function getUsersData() {
     return users;
 }
 
+export async function getUserData(url_clip) {
+    let user = Firebase.auth().currentUser;
+    const q = query(collection(db, "utilisateurs"), where("user_id", "==", user.uid), where("url_clip", "==", url_clip));
+    const querySnapshot = await getDocs(q);
+    let users = {};
+    querySnapshot.forEach((doc) => {
+        users[0] = doc.id;
+    });
+    return users;
+}
+
 export async function deleteUserData(url_clip) {
     let user = Firebase.auth().currentUser;
     const q = query(collection(db, "utilisateurs"), where("user_id", "==", user.uid), where("url_clip", "==", url_clip));
