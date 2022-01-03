@@ -8,7 +8,11 @@ Hé bien c'est désormais possible avec notre application PastwitchOlive.
 
 Clonnez le repo de l'application avec la commande suivante : ```git clone [pastwicholive](https://github.com/efique/Pastwicholive.git)  ``` (ou via votre application de gestionaire de git tiers comme ~~l'infame~~ github desktop)
 
-Il vous faudra ensuite installer react-native et expo et lancer le projet via la commande ```expo start```
+Il vous faudra ensuite installer npm, react-native et expo.
+
+Installez les librairies complémentaire avec la commande ```npm install```
+
+Lancez l'application avec la commande ```expo start```
 
 Selectionner le lanceur android avec la touche "a" après vous etre assuré d'avoir lancer un émulateur android ou branché votre téléphone android au PC
 
