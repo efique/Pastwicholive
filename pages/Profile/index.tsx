@@ -51,6 +51,27 @@ export default function ProfilePage() {
         })
     }, [])
 
+    function getClips() {
+        let test = ['PopularAgileWoodpeckerShadyLulu', 'PopularAgileWoodpeckerShadyLulu', 'ScaryRelentlessVelociraptorBabyRage']
+        let clips = [];
+        test.forEach((id: string) => {
+            fetch(`https://api.twitch.tv/helix/clips?id=${id}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer jyjuqv7imq62o6gldfufqoqz4hklhr',
+                    'Client-id': 'zq9uuf6vb5lfmuhrvcu9vnodpq91pv'
+                }
+            })
+            .then((response) => response.json()) // liste des clips
+            .then((json) => {
+                json.data.forEach((element: any) => { // pour chaque clip
+                    clips.push(element)
+                });
+            })
+        });
+        return clips;
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView>
