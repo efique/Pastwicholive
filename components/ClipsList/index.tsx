@@ -24,7 +24,7 @@ const ClipsList = (props: {clips: any}) => {
                     return (
                         <Card
                             style={key === clips.length - 1 ? styles.lastCard : styles.card}
-                            onPress={() => {navigation.navigate('Clip')}}
+                            onPress={() => {}}
                             key={key}
                         >
                             <Card.Cover style={{ borderRadius: 0 }} source={{uri: clip.thumbnail_url}} />

@@ -43,7 +43,7 @@ export default function ProfileStack() {
                 name="Profile"
                 component={ProfilePage}
                 options={{
-                    title: 'Profil'
+                    title: "Votre profil : " + Firebase.auth().currentUser.email
                 }}
             />
         </ProfileStack.Navigator>
