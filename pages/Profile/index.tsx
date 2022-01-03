@@ -1,12 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Text, StyleSheet, SafeAreaView, ScrollView } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
-import {Card, Title} from "react-native-paper";
-import {ClipsList} from "../../components";
-import {getUserData, getUsersData} from "../../utils/firebase";
-import {ClipProps} from "../../types";
-import {useNavigation} from "@react-navigation/native";
+import { Card, Title } from "react-native-paper";
+import { getUserData, getUsersData } from "../../utils/firebase";
+import { ClipProps } from "../../types";
+import { useNavigation } from "@react-navigation/native";
 
 export default function ProfilePage() {
     const styles = StyleSheet.create({
@@ -41,12 +40,12 @@ export default function ProfilePage() {
                         'Client-id': 'zq9uuf6vb5lfmuhrvcu9vnodpq91pv'
                     }
                 })
-                .then((response) => response.json()) // liste des clips
-                .then((json) => {
-                    json.data.forEach((element: any) => { // pour chaque clip
-                        setClips(clips => [...clips, element])
-                    });
-                })
+                    .then((response) => response.json()) // liste des clips
+                    .then((json) => {
+                        json.data.forEach((element: any) => { // pour chaque clip
+                            setClips(clips => [...clips, element])
+                        });
+                    })
             })
         })
     }, [])
@@ -62,12 +61,12 @@ export default function ProfilePage() {
                     'Client-id': 'zq9uuf6vb5lfmuhrvcu9vnodpq91pv'
                 }
             })
-            .then((response) => response.json()) // liste des clips
-            .then((json) => {
-                json.data.forEach((element: any) => { // pour chaque clip
-                    clips.push(element)
-                });
-            })
+                .then((response) => response.json()) // liste des clips
+                .then((json) => {
+                    json.data.forEach((element: any) => { // pour chaque clip
+                        clips.push(element)
+                    });
+                })
         });
         return clips;
     }
@@ -75,7 +74,7 @@ export default function ProfilePage() {
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView>
-                <Title style={styles.header}>VOS FAVORIS : { clips.length }</Title>
+                <Title style={styles.header}>VOS FAVORIS : {clips.length}</Title>
                 {
                     clips.map((clip: ClipProps, key: number) => {
                         return (
@@ -88,11 +87,11 @@ export default function ProfilePage() {
                                 }}
                                 key={key}
                             >
-                                <Card.Cover style={{borderRadius: 0}} source={{uri: clip.thumbnail_url}}/>
+                                <Card.Cover style={{ borderRadius: 0 }} source={{ uri: clip.thumbnail_url }} />
                                 <Card.Title
                                     title={clip.title}
                                     subtitle={"Par: " + clip.creator_name}
-                                    right={() => <Card.Title title={clip.duration + "s"}/>}
+                                    right={() => <Card.Title title={clip.duration + "s"} />}
                                 />
                             </Card>
                         )

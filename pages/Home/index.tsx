@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, ScrollView, SafeAreaView } from "react-native";
-import { ClipsList } from "../../components";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { FlatList } from "react-native-gesture-handler";
 import { Card } from "react-native-paper";
@@ -67,9 +66,6 @@ export default function HomePage() {
 
     return (
         <SafeAreaView style={styles.container}>
-            {/* <ScrollView>
-                <ClipsList clips={clips} />
-            </ScrollView> */}
             <FlatList
                 data={clips}
                 renderItem={({ item }) => (
