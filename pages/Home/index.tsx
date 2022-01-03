@@ -24,11 +24,8 @@ export default function HomePage() {
         })
             .then((response) => response.json()) // liste des jeux
             .then((json) => {
-                console.log(json.data)
                 setPagination(json.pagination.cursor)
-                console.log("pagination : " + pagination)
                 json.data.forEach((element: any) => { // Pour chaque jeu
-                    //console.log(element.id +" : "+ element.name)
                     fetch('https://api.twitch.tv/helix/clips?game_id=' + element.id + '&first=10', { // requete des clips pour chaque jeux
                         method: 'GET',
                         headers: {
@@ -38,9 +35,7 @@ export default function HomePage() {
                     })
                         .then((response) => response.json()) // liste des clips
                         .then((json) => {
-                            console.log("\n" + element.name)
                             json.data.forEach((element: any) => { // pour chaque clip
-                                //console.log(element)
                                 setClips(clips => [...clips, element])
                             });
                         })
@@ -75,7 +70,6 @@ export default function HomePage() {
             {/* <ScrollView>
                 <ClipsList clips={clips} />
             </ScrollView> */}
-
             <FlatList
                 data={clips}
                 renderItem={({ item }) => (
@@ -97,8 +91,6 @@ export default function HomePage() {
                 }
                 onEndReached={() => {
                     nextPage(pagination)
-                    console.log("pagination : " + pagination)
-                    console.log("next : " + next)
                 }}
                 keyExtractor={item => item.id.toString()}
             />
