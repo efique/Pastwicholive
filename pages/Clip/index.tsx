@@ -25,6 +25,11 @@ export default function ClipPage({ route }) {
     const [clip, setClipUrl] = useState("")
     const [fav, setFav] = useState(false)
 
+    const favoris = getUserData(route.params.id)
+    const promise = new Promise((resolve, reject) => {
+        resolve(favoris)
+    });
+
     useEffect(() => {
         fetch('https://api.twitch.tv/helix/clips?id=' + route.params.id, {
             method: 'GET',
@@ -37,8 +42,11 @@ export default function ClipPage({ route }) {
             .then((json) => {
                 console.log(json.data[0].embed_url)
                 setClipUrl(json.data[0].embed_url.toString())
-                const favoris = getUserData(route.params.id)
-                setFav(favoris)
+
+
+                promise.then((value) => {
+                    setFav(value)
+                })
             })
     }, [])
 
