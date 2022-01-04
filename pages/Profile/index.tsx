@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Text, StyleSheet, SafeAreaView, ScrollView } from "react-native";
-import DateTimePicker from "@react-native-community/datetimepicker";
+import { StyleSheet, SafeAreaView, ScrollView, RefreshControl } from "react-native";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { Card, Title } from "react-native-paper";
-import { getUserData, getUsersData } from "../../utils/firebase";
+import { getUsersData } from "../../utils/firebase";
 import { ClipProps } from "../../types";
 import { useNavigation } from "@react-navigation/native";
+
+
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  }
+
 
 export default function ProfilePage() {
     const styles = StyleSheet.create({
@@ -23,15 +28,21 @@ export default function ProfilePage() {
         card: {
             marginBottom: 20,
         },
-        lastCard: {}
+        lastCard: {},
+        refresh: {
+            textAlign:"center"
+        }
     });
     const [clips, setClips] = useState([]);
     const navigation = useNavigation();
+    const [refreshing, setRefreshing] = React.useState(false);
+    const [refresh, setRefresh] = useState(false)
 
     useEffect(() => {
         new Promise((resolve, reject) => {
             resolve(getUsersData())
         }).then((clipsIds) => {
+            setClips([]);
             Object.values(clipsIds).forEach((id: string) => {
                 fetch(`https://api.twitch.tv/helix/clips?id=${id}`, {
                     method: 'GET',
@@ -42,38 +53,34 @@ export default function ProfilePage() {
                 })
                     .then((response) => response.json()) // liste des clips
                     .then((json) => {
+                        
                         json.data.forEach((element: any) => { // pour chaque clip
                             setClips(clips => [...clips, element])
                         });
                     })
             })
         })
-    }, [])
+    }, [refresh])
 
-    function getClips() {
-        let test = ['PopularAgileWoodpeckerShadyLulu', 'PopularAgileWoodpeckerShadyLulu', 'ScaryRelentlessVelociraptorBabyRage']
-        let clips = [];
-        test.forEach((id: string) => {
-            fetch(`https://api.twitch.tv/helix/clips?id=${id}`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer jyjuqv7imq62o6gldfufqoqz4hklhr',
-                    'Client-id': 'zq9uuf6vb5lfmuhrvcu9vnodpq91pv'
-                }
-            })
-                .then((response) => response.json()) // liste des clips
-                .then((json) => {
-                    json.data.forEach((element: any) => { // pour chaque clip
-                        clips.push(element)
-                    });
-                })
-        });
-        return clips;
-    }
+   
+
+    const onRefresh = React.useCallback(() => {
+      setRefreshing(true);
+      setRefresh(refresh => !refresh);
+      wait(1000).then(() => setRefreshing(false));
+    }, []);
 
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView>
+            <ScrollView
+                refreshControl={
+                    <RefreshControl
+                        refreshing={refreshing}
+                        onRefresh={onRefresh}
+                    />
+                }
+            >
+                <Title style={styles.refresh}>Scrollez vers le bas pour rafraîchir la liste </Title>
                 <Title style={styles.header}>VOS FAVORIS : {clips.length}</Title>
                 {
                     clips.map((clip: ClipProps, key: number) => {
